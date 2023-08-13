@@ -48,7 +48,7 @@ jobs:
                   pip install -r requirements/local.txt
 
             - name: Run django tests
-              run: python manage.py test app/
+              run: python manage.py test apps/
 
             - name: Check formatting with black
               run: black --check --diff .
