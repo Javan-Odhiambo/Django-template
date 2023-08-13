@@ -73,5 +73,5 @@ jobs:
       - name: Install dependancies
         run: pip install -r ./requirements/local.txt
 
-      - name: Start server
+      - name: Start test
         run: python manage.py test apps/

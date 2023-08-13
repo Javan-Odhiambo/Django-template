@@ -9,7 +9,7 @@ class UserManagersTests(TestCase):
         self.assertEqual(user.email, "test@mail.com")
         self.assertTrue(user.is_active)
         self.assertFalse(user.is_staff)
-        self.assertTrue(user.is_superuser)
+        self.assertFalse(user.is_superuser)
 
         with self.assertRaises(TypeError):
             User.objects.create_user()
