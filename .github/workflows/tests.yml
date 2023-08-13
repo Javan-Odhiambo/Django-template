@@ -81,4 +81,4 @@ jobs:
                 echo DB_PORT=5432 >> .env
                 echo DB_NAME="test" >> .env
 
-                docker-compose  docker-compose up --build --abort-on-container-exit
+                docker-compose up --build --abort-on-container-exit
