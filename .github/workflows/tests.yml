@@ -22,7 +22,7 @@ jobs:
         runs-on: ubuntu-latest
 
         services:
-            db:
+            postgressdb:
               image: postgres:13-alpine
               env:
                   POSTGRES_USER: ${{ env.DB_USER }}
@@ -70,15 +70,16 @@ jobs:
             # Builds the images and runs the tests then exits when done
             - name: Build images and run tests
               run: |
-                echo DEBUG="True" > .env
-                echo SECRET_KEY="test-secret-key" >> .env
-                echo ALLOWED_HOSTS="127.0.0.1,localhost,testserver" >> .env
-                echo USE_SQLITE="True" >> .env
+                echo DEBUG=${{ env.DEBUG }} > .env
+                echo SECRET_KEY=${{ env.SECRET_KEY }} >> .env
+                echo ALLOWED_HOSTS=${{ env.ALLOWED_HOSTS }} >> .env
 
-                echo DB_USER="test" >> .env
-                echo DB_PASS="test" >> .env
-                echo DB_HOST="db" >> .env
-                echo DB_PORT=5432 >> .env
-                echo DB_NAME="test" >> .env
+                echo DB_USER=${{ env.DB_USER }} >> .env
+                echo DB_PASS=${{ env.DB_PASS }} >> .env
+                echo DB_HOST=${{ env.DB_HOST }} >> .env
+                echo DB_PORT=${{ env.DB_PORT }} >> .env
+                echo DB_NAME=${{ env.DB_NAME }} >> .env
+                echo DJANGO_SETTINGS_MODULE="config.settings.test"
 
-                docker-compose up --build --abort-on-container-exit
+
+                docker-compose -f docker-compose.staging.yml docker-compose up --build --abort-on-container-exit
