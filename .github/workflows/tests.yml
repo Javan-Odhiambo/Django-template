@@ -82,4 +82,4 @@ jobs:
                 echo DJANGO_SETTINGS_MODULE="config.settings.test"
 
 
-                docker-compose -f docker-compose.staging.yml docker-compose up --build --abort-on-container-exit
+                docker-compose up -f docker-compose.staging.yml --build --abort-on-container-exit
