@@ -9,7 +9,7 @@ on:
 env:
     DB_USER: test
     DB_PASS: test
-    DB_HOST: 127.0.0.1
+    DB_HOST: postgres_db
     DB_PORT: 5432
     DB_NAME: test
     DEBUG: True
@@ -22,7 +22,7 @@ jobs:
         runs-on: ubuntu-latest
 
         services:
-            postgressdb:
+            postgres_db:
               image: postgres:13-alpine
               env:
                   POSTGRES_USER: ${{ env.DB_USER }}
@@ -67,10 +67,9 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v3
             
-            # Builds the images and runs the tests then exits when done
-            - name: Build images and run tests
+            - name: Create .env file
               run: |
-                echo DEBUG=${{ env.DEBUG }} > .env
+                DEBUG=${{ env.DEBUG }} > .env
                 echo SECRET_KEY=${{ env.SECRET_KEY }} >> .env
                 echo ALLOWED_HOSTS=${{ env.ALLOWED_HOSTS }} >> .env
 
@@ -82,4 +81,6 @@ jobs:
                 echo DJANGO_SETTINGS_MODULE="config.settings.test" >> .env
 
 
-                docker compose -f docker-compose-staging.yml up --build --abort-on-container-exit
+            # Builds the images and runs the tests then exits when done
+            - name: Build images and run tests
+              run: docker compose -f docker-compose.yml up --build --abort-on-container-exit
