@@ -70,16 +70,16 @@ jobs:
             # Builds the images and runs the tests then exits when done
             - name: Build images and run tests
               run: |
-                echo DEBUG=${{ env.DEBUG }} > /code/.env
-                echo SECRET_KEY=${{ env.SECRET_KEY }} >> /code/.env
-                echo ALLOWED_HOSTS=${{ env.ALLOWED_HOSTS }} >> /code/.env
+                echo DEBUG=${{ env.DEBUG }} > .env
+                echo SECRET_KEY=${{ env.SECRET_KEY }} >> .env
+                echo ALLOWED_HOSTS=${{ env.ALLOWED_HOSTS }} >> .env
 
-                echo DB_USER=${{ env.DB_USER }} >> /code/.env
-                echo DB_PASS=${{ env.DB_PASS }} >> /code/.env
-                echo DB_HOST=${{ env.DB_HOST }} >> /code/.env
-                echo DB_PORT=${{ env.DB_PORT }} >> /code/.env
-                echo DB_NAME=${{ env.DB_NAME }} >> /code/.env
-                echo DJANGO_SETTINGS_MODULE="config.settings.test" >> /code/.env
+                echo DB_USER=${{ env.DB_USER }} >> .env
+                echo DB_PASS=${{ env.DB_PASS }} >> .env
+                echo DB_HOST=${{ env.DB_HOST }} >> .env
+                echo DB_PORT=${{ env.DB_PORT }} >> .env
+                echo DB_NAME=${{ env.DB_NAME }} >> .env
+                echo DJANGO_SETTINGS_MODULE="config.settings.test" >> .env
 
 
                 docker compose -f docker-compose-staging.yml up --build --abort-on-container-exit
