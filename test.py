@@ -42,6 +42,7 @@ def main():
     os.environ["USE_SQLITE"] = "True"
     os.environ["SECRET_KEY"] = "test-secret-key"
     os.environ["ALLOWED_HOSTS"] = "127.0.0.1,localhost,testserver"
+    os.environ["DJANGO_SETTINGS_MODULE"] = "config.settings.test"
 
     args = parser.parse_args()
 
