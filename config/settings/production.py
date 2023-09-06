@@ -26,3 +26,7 @@ SECURE_SSL_REDIRECT = True
 # ==============================================================================
 # THIRD-PARTY APPS SETTINGS
 # ==============================================================================
+
+# Whitenoise
+MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
