@@ -11,7 +11,7 @@ WORKDIR /code
 
 # Install dependencies
 COPY ./requirements/ ./requirements/
-RUN pip install -r /code/requirements/local.txt
+RUN pip install -r /code/requirements/production.txt
 
 # Copy project
 COPY . .
